@@ -26,8 +26,36 @@ if hist_button:
     # 'use_container_width=True' ajusta el ancho del gráfico al contenedor
     st.plotly_chart(fig, use_container_width=True)
 
+# Crear un botón para construir un gráfico de dispersión
+scatter_button = st.button('Construir gráfico de dispersión')
+
+if scatter_button:
+    st.write(
+        'Relación entre el odómetro y el precio '
+        'de los anuncios de venta de coches'
+    )
+
+    fig_scatter = go.Figure(
+        data=[
+            go.Scatter(
+                x=car_data['odometer'],
+                y=car_data['price'],
+                mode='markers'
+            )
+        ]
+    )
+
+    fig_scatter.update_layout(
+        title_text='Relación entre Odómetro y Precio',
+        xaxis_title='Odómetro',
+        yaxis_title='Precio'
+    )
+
+    st.plotly_chart(fig_scatter, use_container_width=True)
+
     # crear una casilla de verificación
 build_histogram = st.checkbox('Construir un histograma')
 
 if build_histogram: # si la casilla de verificación está seleccionada
     st.write('Construir un histograma para la columna odómetro')
+
